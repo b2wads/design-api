@@ -18,7 +18,7 @@ module.exports = {
    * @returns { Product }
    */
   serialize(data) {
-    return { id: data.id, name: data.name, price: data.price, category_id: data.category_id }
+    return { id: data.id, name: data.name, price: parseFloat(data.price), category_id: data.category_id }
   },
 
   /**
