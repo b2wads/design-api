@@ -168,7 +168,7 @@ describe('[Acceptance] Products V1', () => {
             res = await app.get('/v1/products').query({ sort: 'price', order: 'desc' })
           })
 
-          it('should return products ordered by price:asc', () => {
+          it('should return products ordered by price:desc', () => {
             const { _meta, data } = res.body
             expect(_meta).to.have.property('sort', 'price')
             expect(_meta).to.have.property('order', 'DESC')
