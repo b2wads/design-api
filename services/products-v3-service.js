@@ -21,7 +21,7 @@ module.exports = {
     return {
       id: data.id,
       name: data.name,
-      price: data.price,
+      price: parseFloat(data.price),
       category: {
         id: category.id,
         name: category.name
