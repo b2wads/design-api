@@ -10,7 +10,7 @@ describe('[Acceptance] Products V2', () => {
     const categoryFixture = { id: 1, name: 'Tecnologia' }
 
     before(async () => {
-      await Promise.all(Products.truncate(), Categories.truncate())
+      await Promise.all([Products.truncate(), Categories.truncate()])
       await Categories.create(categoryFixture)
     })
 
@@ -120,7 +120,7 @@ describe('[Acceptance] Products V2', () => {
 
       it('should update product in database', () => {
         expect(dbProduct).to.have.property('id', oldFixture.id)
-        expect(dbProduct).to.have.property('price', newFixture.price)
+        expect(parseFloat(dbProduct.price)).to.be.eql(newFixture.price)
       })
     })
     context('when product not exists', () => {
@@ -142,7 +142,7 @@ describe('[Acceptance] Products V2', () => {
 
     context('when name is empty', () => {
       before(async () => {
-        res = await app.put(`/v2/product/${oldFixture.id}`).send({ name: '' })
+        res = await app.put(`/v2/products/${oldFixture.id}`).send({ name: '' })
       })
 
       it('should return 422 (Unprocessable Entity)', () => {
