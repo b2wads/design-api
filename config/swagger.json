@@ -1,317 +1,352 @@
 {
     "openapi": "3.0.1",
     "info": {
-        "title": "design-api",
-        "description": "Exercícios práticos das aulas de Design de API",
-        "version": "0.1.0"
+      "title": "design-api",
+      "description": "Exercícios práticos das aulas de Design de API",
+      "version": "0.1.0"
     },
     "externalDocs": {
-        "description": "Ver no Github",
-        "url": "https://github.com/b2wads/design-api"
+      "description": "Ver no Github",
+      "url": "https://github.com/b2wads/design-api"
     },
     "servers": [
-        {
-            "url": "http://localhost:3000",
-            "description": "Local"
-        }
+      {
+        "url": "http://localhost:3000",
+        "description": "Local"
+      }
+    ],
+    "tags": [
+      {
+        "name": "Categorias"
+      }
     ],
     "paths": {
-        "/categories": {
-            "get": {
-                "summary": "Listar categorias",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "name",
-                        "schema": {
-                            "type": "string",
-                            "required": false
-                        },
-                        "description": "Busca por categoria com name igual"
-                    },
-                    {
-                        "in": "query",
-                        "name": "name__contains",
-                        "schema": {
-                            "type": "string",
-                            "required": false
-                        },
-                        "description": "Busca categorias onde name contém o valor informado"
-                    },
-                    {
-                        "in": "query",
-                        "name": "limit",
-                        "schema": {
-                            "type": "number",
-                            "required": false,
-                            "default": 10
-                        },
-                        "description": "Números de categorias para serem retornadas"
-                    },
-                    {
-                        "in": "query",
-                        "name": "offset",
-                        "schema": {
-                            "type": "number",
-                            "required": false,
-                            "default": 0
-                        },
-                        "description": "Posição onde deve iniciar a contagem na lista de categorias"
-                    },
-                    {
-                        "in": "query",
-                        "name": "sort",
-                        "schema": {
-                            "type": "string",
-                            "required": false,
-                            "default": "id"
-                        },
-                        "description": "Campo para ordenar categorias"
-                    },
-                    {
-                        "in": "query",
-                        "name": "order",
-                        "schema": {
-                            "type": "string",
-                            "required": false,
-                            "default": "ASC"
-                        },
-                        "description": "Direção da ordenação"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Retorna categorias paginadas",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "_meta": {
-                                            "description": "Metadados da paginação",
-                                            "type": "object",
-                                            "properties": {
-                                                "count": {
-                                                    "type": "number",
-                                                    "description": "Quantidade de categorias"
-                                                },
-                                                "limit": {
-                                                    "type": "number",
-                                                    "description": "Campo limit solicitado"
-                                                },
-                                                "offset": {
-                                                    "type": "number",
-                                                    "description": "Campo offset solicitado"
-                                                },
-                                                "sort": {
-                                                    "type": "string",
-                                                    "description": "Campo de ordenação utilizado"
-                                                },
-                                                "order": {
-                                                    "type": "string",
-                                                    "description": "Direção da ordenação utilizada"
-                                                }
-                                            }
-                                        },
-                                        "data": {
-                                            "description": "Lista de categorias",
-                                            "type": "array",
-                                            "items": {
-                                                "type": "object",
-                                                "properties": {
-                                                    "id": {
-                                                        "type": "number",
-                                                        "description": "Id da categoria"
-                                                    },
-                                                    "name": {
-                                                        "type": "string",
-                                                        "description": "Nome da categoria"
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "ValidationError | Campos inválidos"
-                    },
-                    "500": {
-                        "description": "InternalServerError | Erro não identificado"
-                    }
-                }
+      "/categories": {
+        "get": {
+          "tags": [
+            "Categorias"
+          ],
+          "summary": "Listar categorias",
+          "parameters": [
+            {
+              "in": "query",
+              "name": "name",
+              "required": false,
+              "schema": {
+                "type": "string"
+              },
+              "description": "Busca por categoria com name igual"
             },
-            "post": {
-                "summary": "Cria categoria",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "name": {
-                                        "type": "string",
-                                        "required": true,
-                                        "description": "Nome da categoria"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Categoria criada com sucesso",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "number",
-                                            "description": "Id da categoria"
-                                        },
-                                        "name": {
-                                            "type": "string",
-                                            "description": "Nome da categoria"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "ValidationError | Campos inválidos"
-                    },
-                    "500": {
-                        "description": "InternalServerError | Erro não identificado"
-                    }
-                }
+            {
+              "in": "query",
+              "name": "name__contains",
+              "required": false,
+              "schema": {
+                "type": "string"
+              },
+              "description": "Busca categorias onde name contém o valor informado"
+            },
+            {
+              "in": "query",
+              "name": "limit",
+              "required": false,
+              "schema": {
+                "type": "number",
+                "default": 10
+              },
+              "description": "Números de categorias para serem retornadas"
+            },
+            {
+              "in": "query",
+              "name": "offset",
+              "required": false,
+              "schema": {
+                "type": "number",
+                "default": 0
+              },
+              "description": "Posição onde deve iniciar a contagem na lista de categorias"
+            },
+            {
+              "in": "query",
+              "name": "sort",
+              "required": false,
+              "schema": {
+                "type": "string",
+                "default": "id"
+              },
+              "description": "Campo para ordenar categorias"
+            },
+            {
+              "in": "query",
+              "name": "order",
+              "required": false,
+              "schema": {
+                "type": "string",
+                "default": "ASC"
+              },
+              "description": "Direção da ordenação"
             }
+          ],
+          "responses": {
+            "200": {
+              "description": "Retorna categorias paginadas",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "_meta": {
+                        "description": "Metadados da paginação",
+                        "type": "object",
+                        "properties": {
+                          "count": {
+                            "type": "number",
+                            "description": "Quantidade de categorias"
+                          },
+                          "limit": {
+                            "type": "number",
+                            "description": "Campo limit solicitado"
+                          },
+                          "offset": {
+                            "type": "number",
+                            "description": "Campo offset solicitado"
+                          },
+                          "sort": {
+                            "type": "string",
+                            "description": "Campo de ordenação utilizado"
+                          },
+                          "order": {
+                            "type": "string",
+                            "description": "Direção da ordenação utilizada"
+                          }
+                        }
+                      },
+                      "data": {
+                        "description": "Lista de categorias",
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number",
+                              "description": "Id da categoria"
+                            },
+                            "name": {
+                              "type": "string",
+                              "description": "Nome da categoria"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "ValidationError | Campos inválidos"
+            },
+            "500": {
+              "description": "InternalServerError | Erro não identificado"
+            }
+          }
         },
-        "/categories/:id": {
-            "get": {
-                "summary": "Busca categoria por ID",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "schema": {
-                            "type": "number",
-                            "required": true
-                        },
-                        "description": "Id da categoria buscada"
+        "post": {
+          "summary": "Cria categoria",
+          "tags": [
+            "Categorias"
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "name"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Nome da categoria"
                     }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Retorna categoria buscada",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "number",
-                                            "description": "Id da categoria"
-                                        },
-                                        "name": {
-                                            "type": "string",
-                                            "description": "Nome da categoria"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "NotFoundError | Categoria não encontrada"
-                    },
-                    "422": {
-                        "description": "ValidationError | Campos inválidos"
-                    },
-                    "500": {
-                        "description": "InternalServerError | Erro não identificado"
-                    }
+                  }
                 }
-            },
-            "put": {
-                "summary": "Editar uma categoria",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "schema": {
-                            "type": "number",
-                            "required": true
-                        },
-                        "description": "Id da categoria"
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "name": {
-                                        "type": "string",
-                                        "required": false,
-                                        "description": "Nome da categoria"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Categoria atualizada com sucesso",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "number",
-                                            "description": "Id da categoria"
-                                        },
-                                        "name": {
-                                            "type": "string",
-                                            "description": "Nome da categoria"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "NotFoundError | Categoria não encontrada"
-                    },
-                    "422": {
-                        "description": "ValidationError | Campos inválidos"
-                    },
-                    "500": {
-                        "description": "InternalServerError | Erro não identificado"
-                    }
-                }
-            },
-            "delete": {
-                "summary": "Remover uma categoria",
-                "responses": {
-                    "200": {
-                        "description": "Categoria removida com sucesso"
-                    },
-                    "404": {
-                        "description": "NotFoundError | Categoria não encontrada"
-                    },
-                    "500": {
-                        "description": "InternalServerError | Erro não identificado"
-                    }
-                }
+              }
             }
+          },
+          "responses": {
+            "200": {
+              "description": "Categoria criada com sucesso",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "description": "Id da categoria"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "Nome da categoria"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "422": {
+              "description": "ValidationError | Campos inválidos"
+            },
+            "500": {
+              "description": "InternalServerError | Erro não identificado"
+            }
+          }
         }
+      },
+      "/categories/{id}": {
+        "get": {
+          "summary": "Busca categoria por ID",
+          "tags": [
+            "Categorias"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "schema": {
+                "type": "number"
+              },
+              "description": "Id da categoria buscada"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Retorna categoria buscada",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "description": "Id da categoria"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "Nome da categoria"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "NotFoundError | Categoria não encontrada"
+            },
+            "422": {
+              "description": "ValidationError | Campos inválidos"
+            },
+            "500": {
+              "description": "InternalServerError | Erro não identificado"
+            }
+          }
+        },
+        "put": {
+          "summary": "Editar uma categoria",
+          "tags": [
+            "Categorias"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "schema": {
+                "type": "number"
+              },
+              "description": "Id da categoria"
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "name"
+                  ],
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Nome da categoria"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Categoria atualizada com sucesso",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "description": "Id da categoria"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "Nome da categoria"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "NotFoundError | Categoria não encontrada"
+            },
+            "422": {
+              "description": "ValidationError | Campos inválidos"
+            },
+            "500": {
+              "description": "InternalServerError | Erro não identificado"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Remover uma categoria",
+          "tags": [
+            "Categorias"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "schema": {
+                "type": "number"
+              },
+              "description": "Id da categoria"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Categoria removida com sucesso"
+            },
+            "404": {
+              "description": "NotFoundError | Categoria não encontrada"
+            },
+            "500": {
+              "description": "InternalServerError | Erro não identificado"
+            }
+          }
+        }
+      }
     }
-}
+  }
